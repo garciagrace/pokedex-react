@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
+import PokemonCard from './components/PokemonCard';
 
 import useShowList from './hooks/useShowList';
 
@@ -24,17 +25,20 @@ const App = () => {
 
   return (
     <>
-      {list.map((pokemon, index) => {
-        if (list.length === index + 1) {
-          return (
-            <p ref={lastElementRef} key={index}>
-              {pokemon.name}
-            </p>
-          );
-        } else {
-          return <p key={index}>{pokemon.name}</p>;
-        }
-      })}
+      {list &&
+        list.map((pokemon, index) => {
+          if (list.length === index + 1) {
+            return (
+              <PokemonCard
+                ref={lastElementRef}
+                key={index}
+                name={pokemon.name}
+              />
+            );
+          } else {
+            return <PokemonCard key={index} name={pokemon.name} />;
+          }
+        })}
     </>
   );
 };
