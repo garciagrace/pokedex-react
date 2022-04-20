@@ -1,4 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
+
+import Container from './components/Container';
 import PokemonCard from './components/PokemonCard';
 
 import useShowList from './hooks/useShowList';
@@ -24,22 +26,24 @@ const App = () => {
   );
 
   return (
-    <>
-      {list &&
-        list.map((pokemon, index) => {
-          if (list.length === index + 1) {
-            return (
-              <PokemonCard
-                ref={lastElementRef}
-                key={index}
-                name={pokemon.name}
-              />
-            );
-          } else {
-            return <PokemonCard key={index} name={pokemon.name} />;
-          }
-        })}
-    </>
+    <Container>
+      <div className="grid  gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        {list &&
+          list.map((pokemon, index) => {
+            if (list.length === index + 1) {
+              return (
+                <PokemonCard
+                  ref={lastElementRef}
+                  key={index}
+                  name={pokemon.name}
+                />
+              );
+            } else {
+              return <PokemonCard key={index} name={pokemon.name} />;
+            }
+          })}
+      </div>
+    </Container>
   );
 };
 export default App;
